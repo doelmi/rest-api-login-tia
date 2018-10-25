@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/Users');
 var logsRouter = require('./routes/Logs')
+var loginRouter = require('./routes/Login')
+var Auth = require('./Middleware/Auth')
 
 var cors = require('cors')
 
@@ -19,20 +21,28 @@ app.set('view engine', 'jade');
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/logs', logsRouter)
+app.use('/users', Auth.login, usersRouter);
+app.use('/logs', Auth.login, logsRouter)
+app.use('/login', loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   // next(createError(404));
-  let error = {message : "Not Found", code : 404}
+  let error = {
+    message: "Not Found",
+    code: 404
+  }
   res.status(404)
-  res.json({error : error})
+  res.json({
+    error: error
+  })
 });
 
 // error handler
