@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var Login = require('../models/Login').child
+var Login = require('../models/Login')
 
 router.post('/cek', function(req, res, next) {
   Login.checkLogin(function(err, rows) {
