@@ -115,8 +115,8 @@ router.get('/cekstatus/:id', function(req, res, next) {
       res.status(401)
       res.json(err)
     } else {
-      if (rows.length == 0) {
-        res.json(true)
+      if (rows.length > 0) {
+        res.json(rows[0].status_login == 1 ? false : true)
       } else {
         res.status(404)
         res.json(false)
