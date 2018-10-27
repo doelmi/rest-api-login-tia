@@ -18,7 +18,7 @@ class Client extends Database {
     return this.db.query(`SELECT keterangan FROM status_user WHERE id = ? LIMIT 1`, [status], callback)
   }
   cekStatusLogin(username, callback){
-    return this.db.query(`SELECT status_login FROM user WHERE username = ? AND dihapus = 0 LIMIT 1`, [username, password], callback)
+    return this.db.query(`SELECT status_login FROM user WHERE username = ? AND dihapus = 0 LIMIT 1`, [username], callback)
   }
 }
 
