@@ -71,7 +71,7 @@ router.get('/keterangan/:ket', function(req, res, next) {
 router.post('/register', function(req, res, next) {
   User.insert(req.body, function(err, result) {
     if (err) {
-      // res.status(401)
+      res.status(401)
       res.json(err)
     } else {
       res.json(result)
@@ -82,6 +82,7 @@ router.post('/register', function(req, res, next) {
 router.get('/nonim/:nim', function(req, res, next) {
   User.selectByNIM(req.params.nim, function(err, rows) {
     if (err) {
+      res.status(401)
       res.json(err)
     } else {
       if (rows.length == 0) {
@@ -96,6 +97,7 @@ router.get('/nonim/:nim', function(req, res, next) {
 router.get('/nouname/:id', function(req, res, next) {
   User.selectByID(req.params.id, function(err, rows) {
     if (err) {
+      res.status(401)
       res.json(err)
     } else {
       if (rows.length == 0) {
