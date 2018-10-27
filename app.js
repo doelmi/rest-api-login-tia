@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/Users');
 var logsRouter = require('./routes/Logs')
 var loginRouter = require('./routes/Login')
+var clientRouter = require('./routes/Client')
 var Auth = require('./Middleware/Auth')
 
 var cors = require('cors')
@@ -31,12 +32,13 @@ app.use('/', indexRouter);
 app.use('/users', Auth.login, usersRouter);
 app.use('/logs', Auth.login, logsRouter)
 app.use('/login', loginRouter)
+app.use('/client', clientRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   // next(createError(404));
   let error = {
-    message: "Not Found",
+    message: "Method Not Found",
     code: 404
   }
   res.status(404)
